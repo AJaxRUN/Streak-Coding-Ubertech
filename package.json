@@ -1,0 +1,19 @@
+{
+  "name": "the-backend",
+  "version": "1.0.0",
+  "description": "This is the node Application that is run for the sake of the proper running of the event called \"Streak Coding\" in Ubertech conducted in 2019",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/haricane8133/streakcoding-ubertech19.git"
+  },
+  "author": "Hari.R, Arjun.CR",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/haricane8133/streakcoding-ubertech19/issues"
+  },
+  "homepage": "https://github.com/haricane8133/streakcoding-ubertech19#readme"
+}
