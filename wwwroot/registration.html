@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Streak Coding</title>
+<link rel="stylesheet" href="css/register.css">
+<link rel="stylesheet" href="css/bootstrap.min.css">
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha256-pasqAKBDmFT4eHoN2ndd6lN370kFiGUFyTiUHWhU7k8=" crossorigin="anonymous"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+</head>
+<body>
+    <div class="container-fluid register" style="margin:0%;padding:0%;">
+                <form class="row" autocomplete="off" method="POST" id="register-form" style="margin-right:0%;">
+                    <div class="col-md-5 register-left">
+                        <h3>Welcome!!</h3>
+                        <p>The three rounds of <b>Streak Coding</b> are focused on presenting students an exposure on industrial level coding questions. Trace the output of the given program and get the passphrase to the next round. Participants need to know very basic C++ or Java. The Streak, 2nd round is hosted in ‘HackerRank’ platform.There would be 10 problems of varying complexity and corresponding points. The top participants from this round would be selected to the final round. The last round is 3 Debug and Optimize,this round is hosted in ‘HackerRank’ platform. participants would be given 2 incorrect programs with some syntactical errors. Participants can use the system to correct it and optimize it. The speed and correctness of the programs would be verified.</p>
+                    </div>
+                    <div class="col-md-1"></div>
+                    <div class="col-md-6 register-right">
+                        <div class="tab-content" id="myTabContent">
+                                <h3 class="register-heading">Register here!!</h3>
+                                <div class="row register-form">
+                                    <div class="col-md-8">
+                                    <div class="form-group">
+                                            <input type="text" id="team_name" class="form-control"  name="team_name" placeholder="Team Name *" value="" />
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" id="username" name="reg_no" placeholder="Registration Number (Team Leader) *" value="" />
+                                        </div>
+                                        <div class="form-group">
+                                            <input name="hackerrank" id="hackerrank" type="text" class="form-control" placeholder="Hackerrank ID *" value="" />
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="number" name="receipt_number" id="rec_number" class="form-control"  placeholder="Receipt number *" value="" />
+                                            <div id="passworderror" class="alert-danger"></div>
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="password" name="password" id="password" class="form-control"  placeholder="Administrator Password *" value="" />
+                                            <div id="passworderror" class="alert-danger"></div><br>
+                                        </div>
+                                        <div id="errormsg" class="alert-danger"></div><br>
+                                        <input type="submit" id="register" class="btn btn-primary" value="Register"/>
+                                    </div>
+                                </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+</body>
+<script type="text/javascript">
+    $("#errormsg").html("");
+    $("#register").click(function(event) {
+        event.preventDefault();
+        $("#errormsg").html("");
+        var isValid=true;
+        $("input").each(function() {
+           var element = $(this);
+           if ($.trim(element.val()) == "") {
+               isValid = false;
+           }
+        });
+        if(!isValid) {
+            $("#errormsg").html("&nbsp&nbsp&nbspPease fill all the fields with valid inputs!");
+            return false;
+        }
+        if(isValid) {
+            data=$("form").serialize();
+            $.ajax({
+                type:"POST",   
+                async: false,
+                cache: false,
+                data: data,
+                url:"/addCandidate",
+                success:function(data)
+                {
+                    if(data=="success")
+                        // window.location.href="registerSuccessfull.php";
+                        alert("Success");
+                    else
+                        alert("Some error occured");
+                }
+
+            });
+        }
+        else {
+            $("#errormsg").html("&nbsp&nbsp&nbspSome error occured!");
+            return false;
+        }
+    });
+
+
+</script>
+</html>
+
+
