@@ -118,7 +118,8 @@ async function ourprocess(){
         });
         app.post("/addCandidate", (req, res, next)=>{
             try{
-                if(req.body["password"] != adminpassword){
+                console.log(req);
+                if(req.body["password"] == adminpassword){
                     let rand = pad(Number.parseInt((Math.random() * 1000).toString()), 3);
                     let set = pad(misc.setno, 3);
                     let uid = rand + set;
