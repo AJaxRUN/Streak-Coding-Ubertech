@@ -2,7 +2,7 @@
 <html>
 <head>
 	<title>STREAK CODING</title>
-<!-- 	<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script> -->
+<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 	<link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
 	<link rel="stylesheet" href="css/request.css">
 	<link rel="stylesheet" href="css/userlogin.css">
@@ -53,18 +53,25 @@
 	</div>
 </body>
 <script type="text/javascript">
-	// $(document).ready(function() {
-	// 	$.ajax({
-	// 		type:"GET",
-	// 		url: "../sessiondata/populateAjax.php",
-	// 		success: function(data) {
-	// 			$("#status").append(data['status']);
-	// 			$("#clgname").text(data['clgname']);
-	// 			$("#empcode").append(data['empcode']);
-	// 			$("#profile").text(data['name']);
-	// 		},
-	// 		dataType:"json"
-	// 	});
-	// });
+	$(document).ready(function() {
+		var pass = prompt("Administrator password:");
+		pass  = "password="+pass;
+		console.log(pass);
+		$.ajax({
+			type:"POST",
+			url: "/getAllCandidates",
+			contentType: 'application/x-www-form-urlencoded',
+            data: pass,
+			success: function(data) {
+				if(data=="success")
+					loadData();
+				else
+					alert("Incorrect password!");
+			}
+		});
+		function loadData() {
+			console.log("success");
+		}
+	});
 </script>
 </html>
