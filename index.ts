@@ -140,7 +140,7 @@ async function ourprocess(){
                         "hackrank": 10000
                     };
                     saveScores();
-                    res.send("Candidate Registered! The UID is " + uid);
+                    res.send(uid);
                 }
                 else{
                     res.send("Admin Password is Wrong!");
