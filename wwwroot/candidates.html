@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>STREAK CODING</title>
+<!-- 	<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script> -->
+	<link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="request.css">
+	<link rel="stylesheet" href="userlogin.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <ul>
+  		<li style="float:left;margin-left:20px;"><a id="streak_coding" class="active" style="text-decoration:none;">STREAK CODING</a></li>
+  		<li style="float:right;margin-right:10px" id="flip"><a class="active" style="text-decoration:none;" href="leaderboard.html">Leaderboard</a></li>
+	</ul>
+	<style type="text/css">
+		hr{
+			border-color: #696464;
+		}
+		body {
+			font-family: 'Roboto', sans-serif;
+		}
+	</style>
+</head>
+<body>
+	<div id="navbar" style="z-index:1000;position:relative;width:auto;height:auto;"></div>
+	<div class="data">
+		<h2>CANDIDATES LIST</h2><hr>
+		<table id="leaderboard">
+			<tr>
+				<th>NAME</th>
+				<th>HACK_ID</th>
+				<th>RECEIPT</th>
+				<th>U_ID</th>
+			</tr>
+			<tr>
+				<td>hello</td>
+				<td>hello</td>
+				<td>hello</td>
+				<td>hello</td>
+			</tr>
+			<tr>
+				<td>hello</td>
+				<td>hello</td>
+				<td>hello</td>
+				<td>hello</td>
+			</tr>
+			<tr>
+				<td>hello</td>
+				<td>hello</td>
+				<td>hello</td>
+				<td>hello</td>
+			</tr>
+		</table>
+	</div>
+</body>
+<script type="text/javascript">
+	// request /getAllCandidates?pass=<password>
+	// $(document).ready(function() {
+	// 	$.ajax({
+	// 		type:"GET",
+	// 		url: "../sessiondata/populateAjax.php",
+	// 		success: function(data) {
+	// 			$("#status").append(data['status']);
+	// 			$("#clgname").text(data['clgname']);
+	// 			$("#empcode").append(data['empcode']);
+	// 			$("#profile").text(data['name']);
+	// 		},
+	// 		dataType:"json"
+	// 	});
+	// });
+</script>
+</html>

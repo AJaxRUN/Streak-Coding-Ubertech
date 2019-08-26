@@ -29,6 +29,7 @@ let mqttsettings = {
 let topic = 'scores';
 let host = "localhost";
 let contestName = "thisisatemporaryevent";
+let adminpassword = "ola";
 
 let passwords = ["6fBgDhF0UBER!", "3aLbNcP2UBER!", "3lFmHnJ2UBER!", "1gHhJiL2UBER!", "5tEuGvI0UBER!", "1eIfKgM1UBER!", "2wTxVyX1UBER!", "4qArCsE2UBER!", "6oCpEqG2UBER!", "1iEjGkI1UBER!", "0kJlLmN0UBER!", "0aBbDcF2UBER!", "4uFvHwJ1UBER!", "1jUkWlY2UBER!", "1pDqFrH0UBER!"];
 
@@ -51,7 +52,7 @@ async function ourprocess(){
         app.use(bodyParser.json());
         app.get("/getAllCandidates", (req, res, next) => {
             // This request would sent by admins
-            if(req.query["pass"] == "ola"){
+            if(req.query["pass"] == adminpassword){
                 let temp = [];
                 Object.keys(candidates).forEach((key, index) => {
                     // key: the name of the object key
@@ -105,7 +106,7 @@ async function ourprocess(){
             }
         });
         app.get("/", (req, res, next)=>{
-            res.sendFile(__dirname + "/wwwroot/index.html");
+            res.sendFile(__dirname + "/wwwroot/leaderboard.html");
         });
         app.get("*", (req, res, next)=>{
             try{
@@ -116,8 +117,8 @@ async function ourprocess(){
             }
         });
         app.post("/addCandidate", (req, res, next)=>{
-            if(req.query["pass"] == "ola"){
-                try{
+            try{
+                if(req.body["password"] != adminpassword){
                     let rand = pad(Number.parseInt((Math.random() * 1000).toString()), 3);
                     let set = pad(misc.setno, 3);
                     let uid = rand + set;
@@ -140,12 +141,12 @@ async function ourprocess(){
                     saveScores();
                     res.send("The UID is " + uid);
                 }
-                catch(err){
-                    res.send("Error in the server");
+                else{
+                    res.send("You must be an admin to add a candidate");
                 }
             }
-            else{
-                res.send("You must be an admin to add a candidate");
+            catch(err){
+                res.send("Error in the server");
             }
         });
         app.listen(httpport, function () {
