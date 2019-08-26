@@ -56,21 +56,22 @@
 	$(document).ready(function() {
 		var pass = prompt("Administrator password:");
 		pass  = "password="+pass;
-		console.log(pass);
+		// console.log(pass);
 		$.ajax({
 			type:"POST",
 			url: "/getAllCandidates",
 			contentType: 'application/x-www-form-urlencoded',
             data: pass,
 			success: function(data) {
-				if(data=="success")
-					loadData();
+				if(data!="404")
+					loadData(data);
 				else
 					alert("Incorrect password!");
 			}
 		});
-		function loadData() {
+		function loadData(data) {
 			console.log("success");
+			console.log(data);
 		}
 	});
 </script>
