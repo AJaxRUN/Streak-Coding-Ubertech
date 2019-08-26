@@ -140,10 +140,10 @@ async function ourprocess(){
                         "hackrank": 10000
                     };
                     saveScores();
-                    res.send("The UID is " + uid);
+                    res.send("Candidate Registered! The UID is " + uid);
                 }
                 else{
-                    res.send("You must be an admin to add a candidate");
+                    res.send("Admin Password is Wrong!");
                 }
             }
             catch(err){
