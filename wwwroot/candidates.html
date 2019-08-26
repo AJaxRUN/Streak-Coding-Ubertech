@@ -63,14 +63,15 @@
 			contentType: 'application/x-www-form-urlencoded',
             data: pass,
 			success: function(data) {
-				if(data=="success")
-					loadData();
+				if(data!="404")
+					loadData(data);
 				else
 					alert("Incorrect password!");
 			}
 		});
-		function loadData() {
+		function loadData(data) {
 			console.log("success");
+			console.log(data);
 		}
 	});
 </script>
