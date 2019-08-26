@@ -143,7 +143,7 @@ async function ourprocess(){
                     res.send(uid);
                 }
                 else{
-                    res.send("Wrong Admin Password!");
+                    res.send("Admin Password is Wrong!");
                 }
             }
             catch(err){

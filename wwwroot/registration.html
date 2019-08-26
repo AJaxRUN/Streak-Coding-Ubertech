@@ -68,16 +68,15 @@
                 type:"POST",   
                 async: false,
                 cache: false,
-                contentType: 'application/x-www-form-urlencoded',
+                contentType: 'application/json',
                 data: data,
                 url:"/addCandidate",
                 success:function(data)
                 {
-                    // if(data=="success")
-                    //     // window.location.href="registerSuccessfull.php";
-                    //     alert("Success");
-                    // else
-                    alert(" "+data);
+                    if(/\d+/.test(data))
+                        window.location.href="success.html?uid="+data;
+                    else
+                        alert(data);
                 }
 
             });
