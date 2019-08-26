@@ -50,6 +50,7 @@ async function ourprocess(){
 
         app = express();
         app.use(bodyParser.json());
+        app.use(bodyParser.urlencoded());
         app.get("/getAllCandidates", (req, res, next) => {
             // This request would sent by admins
             if(req.query["pass"] == adminpassword){
@@ -118,7 +119,6 @@ async function ourprocess(){
         });
         app.post("/addCandidate", (req, res, next)=>{
             try{
-                console.log(req);
                 if(req.body["password"] == adminpassword){
                     let rand = pad(Number.parseInt((Math.random() * 1000).toString()), 3);
                     let set = pad(misc.setno, 3);
