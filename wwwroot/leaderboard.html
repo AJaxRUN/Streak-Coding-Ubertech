@@ -10,7 +10,33 @@
   		<li style="float:left;margin-left:20px;"><a id="streak_coding" class="active" style="text-decoration:none;">STREAK CODING</a></li>
   		<li style="float:right;margin-right:10px" id="flip"><a class="active" style="text-decoration:none;" href="Candidates.html">Candidates list</a></li>
 	</ul>
-	<script src="js/mqtt_bundle.js"></script>
+	<script>
+		const host = "localhost";
+		const port = "8134";
+		if ("WebSocket" in window) {
+               // Let us open a web socket
+               ws = new WebSocket('ws://' + host + ":" + port);
+				
+               ws.onopen = function() {
+                  console.log("Connected to the socket server...");
+               };
+               ws.onmessage = function (evt) { 
+					let scores = JSON.stringify(evt.data);
+					// Dear Arjun,
+					// Here you have the scores object
+					// The format is the one that I told you in lab that day
+					// Please fill up the code in this section which would fill the table
+					// You can refresh the table here everytime
+               };
+				
+               ws.onclose = function() { 
+                  console.log("Disconnected from the server");
+               };
+            } else {
+               // The browser doesn't support WebSocket
+               alert("WebSocket NOT supported by your Browser!");
+            }
+	</script>
 	<style type="text/css">
 		hr{
 			border-color: #696464;

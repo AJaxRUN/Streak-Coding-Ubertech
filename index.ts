@@ -1,13 +1,12 @@
 // This program serves as a broker, leak detector and publisher. That is, it is a broker that continuously monitors leak and publishes values to the broker spun up by itself, for clients that have been connected to it
 
 // Setting up the Broker
-import * as mosca from "mosca";
-import * as mqtt from "mqtt";
 import * as express from "express";
 import * as bodyParser from "body-parser";
 import * as fs from "fs";
 import * as request from "request";
 import * as WebSocket from "ws";
+import * as http from 'http';
 
 let httpport = 8133;
 
@@ -21,13 +20,13 @@ let misc = {
     "setno": 0
 };
 
-let app;
-let server: mosca.Server;
-let client: mqtt.MqttClient;
-let mqttsettings = {
-    port: 1883
+let app
+let app2;
+let server;
+let websocket: WebSocket;
+let socketsettings = {
+    port: 8134
 };
-let topic = 'scores';
 let host = "localhost";
 let contestName = "thisisatemporaryevent";
 let adminpassword = "ola";
@@ -52,7 +51,7 @@ async function ourprocess(){
         app = express();
         app.use(bodyParser.json());
         app.use(bodyParser.urlencoded());
-
+        
         app.get("/getAllCandidates", (req, res, next) => {
             // This request would sent by admins
             if(req.body["password"] == adminpassword){
@@ -156,17 +155,21 @@ async function ourprocess(){
             console.log("HTTP server live in port " + httpport);
         });
 
+        const app2 = express();
+        //initialize a simple http server
+        server = http.createServer(app);
+        //initialize the WebSocket server instance
+        const wss = new WebSocket.Server({server});
 
-        server = new mosca.Server(mqttsettings);
-        server.on("ready", ()=>{
-            console.log("Broker Running at Port: " + mqttsettings.port);
-        });
-        // Setting up the publisher
-        client = mqtt.connect("mqtt://" + host);
-        client.on("connect", () => {
-            console.log("Publisher connected with the server");
+        wss.on('connection', (ws: WebSocket) => {
+            console.log("Connected to a client");
+            websocket = ws;
         });
 
+        //start our server
+        server.listen(8134, () => {
+            console.log("Socket Server started on port 8134");
+        });
     }
     catch(err){
         console.log("Error happened... Restarting server");
@@ -207,18 +210,13 @@ function repeatProcedure(){
     }, 15000);
 }
 
-function publish(client: mqtt.MqttClient, topic: string, message: object) {
+function publish(message: string) {
     try{
-        topic = topic.toString();
-        let strmessage = JSON.stringify(message);
-        client.publish(topic, strmessage);
-        console.log("* Published");
-        console.log("Topic  : " + topic);
-        console.log("Message: " + strmessage);
+        websocket.send(message);
+        console.log("Sent the message " + message);
     }
     catch(err){
-        console.log("Error happened while publishing MQTT...");
-        console.log(err);
+        console.log("No Socket Connections");
     }
 }
 
@@ -271,7 +269,7 @@ function saveScores(){
             "hackrank": scores[key]["hackrank"]
         });
     });
-    publish(client, topic, temp);
+    publish(JSON.stringify(temp));
 }
 function saveMisc(){
     fs.writeFileSync(__dirname + '/saved data/misc.json', JSON.stringify(misc));
