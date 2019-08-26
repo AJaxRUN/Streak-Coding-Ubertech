@@ -7,6 +7,7 @@ import * as express from "express";
 import * as bodyParser from "body-parser";
 import * as fs from "fs";
 import * as request from "request";
+import * as WebSocket from "ws";
 
 let httpport = 8133;
 
@@ -51,9 +52,10 @@ async function ourprocess(){
         app = express();
         app.use(bodyParser.json());
         app.use(bodyParser.urlencoded());
+
         app.get("/getAllCandidates", (req, res, next) => {
             // This request would sent by admins
-            if(req.query["pass"] == adminpassword){
+            if(req.body["password"] == adminpassword){
                 let temp = [];
                 Object.keys(candidates).forEach((key, index) => {
                     // key: the name of the object key
@@ -63,7 +65,7 @@ async function ourprocess(){
                 res.send(temp);
             }
             else{
-                res.send("You have to be an admin in order to view the list of registered candidates");
+                res.send(404);
             }
         });
         app.get("/getPass", (req, res, next) => {
