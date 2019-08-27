@@ -43,8 +43,7 @@
 				   try{
 						let scores = JSON.parse(evt.data);
 						//console.log("Recieved the data");
-						// console.log(scores);
-						// let scores = JSON.stringify(evt.data);
+						$("#leaderboard").html("<h5>Loading...</h5>");
 						scores.sort(function(a, b) {
 					        if(a["score"] != b["score"]){
 					        	return b["score"] - a["score"];
