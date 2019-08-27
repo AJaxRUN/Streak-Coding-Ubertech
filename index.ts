@@ -127,6 +127,7 @@ async function ourprocess(){
                     let set = pad(misc.setno, 3);
                     let uid = rand + set;
                     candidates[uid] = req.body;
+                    candidates[uid]["uid"] = uid;
                     saveCandidates();
                     misc.setno++;
                     if(misc.setno == 15){
