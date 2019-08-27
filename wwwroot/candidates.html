@@ -25,11 +25,21 @@
 	<div class="data">
 		<h2>CANDIDATES LIST</h2><hr>
 		<table id="candidates_list">
+			<tr>
+				<th>NAME</th>
+				<th>HACK' ID</th>
+				<th>UID</th>
+				<th>REG NO.</th>
+				<th>RECEIPT NO.</th>
+			</tr>
 		</table>
 	</div>
 </body>
 <script type="text/javascript">
+	const host = "localhost";
+	const port = "8134";
 	$(document).ready(function() {
+		$("#leaderboard").html("<h5>Loading...</h5>");
 		var pass = prompt("Administrator password:");
 		pass  = "password="+pass;
 		// console.log(pass);
@@ -46,8 +56,11 @@
 			}
 		});
 		function loadData(data) {
-			console.log("success");
-			
+			console.log("Received data!");
+			$.each(data, function(i,item) {
+							rows +="<tr><td>"+item["team_name"]+"</td><td>"+item["hackerrank"]+"</td><td>"+item["uid"]+"</td><td>"+item["reg_no"]+"</td><td>"+item["receipt_no"]+"</td></tr>";
+			});
+			$("#table").append(rows);
 		}
 	});
 </script>
