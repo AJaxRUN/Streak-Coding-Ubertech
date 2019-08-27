@@ -194,13 +194,11 @@ function repeatProcedure(){
             }
             Object.keys(scores).forEach((key, index) => {
                 if(result[candidates[key]["hackerrank"]] != undefined){
+                    scores[key]["hackscore"] = Number.parseInt(result[candidates[key]["hackerrank"]]["score"]);
+                    scores[key]["hackrank"] = Number.parseInt(result[candidates[key]["hackerrank"]]["rank"]);
                     if(scores[key]["hasTraced"] == false){
                         scores[key]["score"] -= points.hackerrankwithouttracePenaltyPenalty;
                         scores[key]["penalty"] += points.hackerrankwithouttracePenaltyPenalty;
-                    }
-                    else{
-                        scores[key]["hackscore"] = Number.parseInt(result[candidates[key]["hackerrank"]]["score"]);
-                        scores[key]["hackrank"] = Number.parseInt(result[candidates[key]["hackerrank"]]["rank"]);
                     }
                 }
             });
