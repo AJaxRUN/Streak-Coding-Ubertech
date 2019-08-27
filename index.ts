@@ -52,21 +52,6 @@ async function ourprocess(){
         app.use(bodyParser.json());
         app.use(bodyParser.urlencoded());
         
-        app.get("/getAllCandidates", (req, res, next) => {
-            // This request would sent by admins
-            if(req.body["password"] == adminpassword){
-                let temp = [];
-                Object.keys(candidates).forEach((key, index) => {
-                    // key: the name of the object key
-                    // index: the ordinal position of the key within the object 
-                    temp.push(candidates[key]);
-                });
-                res.send(temp);
-            }
-            else{
-                res.send(404);
-            }
-        });
         app.get("/getPass", (req, res, next) => {
             // This request would be sent by candidates
             if(scores[req.query["uid"]] === undefined){
@@ -152,6 +137,21 @@ async function ourprocess(){
             }
             catch(err){
                 res.send("Error in the server");
+            }
+        });
+        app.post("/getAllCandidates", (req, res, next) => {
+            // This request would sent by admins
+            if(req.body["password"] == adminpassword){
+                let temp = [];
+                Object.keys(candidates).forEach((key, index) => {
+                    // key: the name of the object key
+                    // index: the ordinal position of the key within the object 
+                    temp.push(candidates[key]);
+                });
+                res.send(temp);
+            }
+            else{
+                res.send("404");
             }
         });
         app.listen(httpport, function () {
