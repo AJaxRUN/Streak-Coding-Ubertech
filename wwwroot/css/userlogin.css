@@ -69,11 +69,7 @@ ul {
 td {
   text-align: center;
 }
-th {
-  margin-left: 20px;
-  text-align: center;
-  border-bottom: 2px solid #444444;
-}
+
 tr {
   text-align:center;
 }
@@ -92,4 +88,10 @@ tr:nth-child(odd) {
 }
 tr:nth-child(-n+5) {
     background-color: #FFD700;
+}
+th {
+  color:white;
+  margin-left: 20px;
+  text-align: center;
+  border-bottom: 2px solid #444444;
 }
