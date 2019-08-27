@@ -209,7 +209,7 @@ function repeatProcedure(){
     });
     setTimeout(()=>{
         repeatProcedure();
-    }, 15000);
+    }, 3000);
 }
 
 function publish(message: string) {
