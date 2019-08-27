@@ -37,13 +37,13 @@
                ws = new WebSocket('ws://' + host + ":" + port);
 				
                ws.onopen = function() {
-                  console.log("Connected to the socket server");
+				  console.log("Connected to the socket server");
+				  $("#leaderboard").html("<h5>Loading...</h5>");
                };
                ws.onmessage = function (evt) {
 				   try{
 						let scores = JSON.parse(evt.data);
 						//console.log("Recieved the data");
-						$("#leaderboard").html("<h5>Loading...</h5>");
 						scores.sort(function(a, b) {
 					        if(a["score"] != b["score"]){
 					        	return b["score"] - a["score"];
