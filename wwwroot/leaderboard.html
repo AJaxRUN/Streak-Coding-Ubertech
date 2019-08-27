@@ -8,7 +8,7 @@
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <ul>
   		<li style="float:left;margin-left:20px;"><a id="streak_coding" class="active" style="text-decoration:none;">STREAK CODING</a></li>
-  		<li style="float:right;margin-right:10px" id="flip"><a class="active" style="text-decoration:none;" href="Candidates.html">Candidates list</a></li>
+  		<li style="float:right;margin-right:10px" id="flip"><a class="active" style="text-decoration:none;" href="candidates.html">Candidates list</a></li>
 	</ul>
 	<script>
 		const host = "localhost";
@@ -24,16 +24,17 @@
 				   try{
 						let scores = JSON.parse(evt.data);
 						console.log("Recieved the data");
-						console.log(scores);
-						// Dear Arjun,
-						// Here you have the scores object
-						// The format is the one that I told you in lab that day
-						// Please fill up the code in this section which would fill the table
-						// You can refresh the table here everytime
+						// console.log(scores);
+						let scores = JSON.stringify(evt.data);
+						var rows = "<tr><th>NAME</th><th>TRACED</th><th>SCORE</th><th>ATTEMPT</th><th>WARNING</th><th>PENALTY</th></tr>";
+						$.each(scores, function(i,item) {
+							rows +="<tr><td>"+item["team_name"]+"</td><td>"+item["hackrank"]+"</td>"+"</td><td>"+item["hasTraced"]+"</td>"+"</td><td>"+item["score"]+"</td>"+"</td><td>"+item["attempt"]+"</td>"+"</td><td>"+item["warning"]+"</td>"+"</td><td>"+item["penalty"]+"</td></tr>";
+						});
+						$("#leaderboard").html(rows);
 				   }
 				   catch(err){
-					   // This means that the sent data has a problem, or the communication has an error
-					   ;
+					   alert("Error connecting to the server!");
+					   console.log(err);
 				   }
                };
 				
@@ -59,38 +60,6 @@
 	<div class="data">
 		<h2>LEADERBOARD</h2><hr>
 		<table id="leaderboard">
-			<tr>
-				<th>NAME</th>
-				<th>TRACED</th>
-				<th>SCORE</th>
-				<th>ATTEMPT</th>
-				<th>WARNING</th>
-				<th>PENALTY</th>
-			</tr>
-			<tr>
-				<td>hello</td>
-				<td>hello</td>
-				<td>hello</td>
-				<td>hello</td>
-				<td>hello</td>
-				<td>hello</td>
-			</tr>
-			<tr>
-				<td>hello</td>
-				<td>hello</td>
-				<td>hello</td>
-				<td>hello</td>
-				<td>hello</td>
-				<td>hello</td>
-			</tr>
-			<tr>
-				<td>hello</td>
-				<td>hello</td>
-				<td>hello</td>
-				<td>hello</td>
-				<td>hello</td>
-				<td>hello</td>
-			</tr>
 		</table>
 	</div>
 </body>
