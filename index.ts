@@ -162,7 +162,7 @@ async function ourprocess(){
 
         const app2 = express();
         //initialize a simple http server
-        server = http.createServer(app);
+        server = http.createServer(app2);
         //initialize the WebSocket server instance
         const wss = new WebSocket.Server({server});
 
