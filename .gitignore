@@ -1,2 +1,4 @@
 node_modules
-saved data
+saved data/candidates.json
+saved data/misc.json
+saved data/scores.json
