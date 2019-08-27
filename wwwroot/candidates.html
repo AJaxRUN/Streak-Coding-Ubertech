@@ -5,7 +5,7 @@
 	<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 	<link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
 	<link rel="stylesheet" href="css/request.css">
-	<link rel="stylesheet" href="css/userlogin.css">
+	<link rel="stylesheet" href="css/candidates.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <ul>
   		<li style="float:left;margin-left:20px;"><a id="streak_coding" class="active" style="text-decoration:none;">STREAK CODING</a></li>
@@ -57,6 +57,7 @@
 		});
 		function loadData(data) {
 			console.log("Received data!");
+			var rows = "";
 			$.each(data, function(i,item) {
 							rows +="<tr><td>"+item["team_name"]+"</td><td>"+item["hackerrank"]+"</td><td>"+item["uid"]+"</td><td>"+item["reg_no"]+"</td><td>"+item["receipt_no"]+"</td></tr>";
 			});
