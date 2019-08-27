@@ -2,6 +2,7 @@
 <html>
 <head>
 	<title>STREAK CODING</title>
+	<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 	<link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
 	<link rel="stylesheet" href="css/request.css">
 	<link rel="stylesheet" href="css/userlogin.css">
@@ -43,7 +44,7 @@
 						console.log("Recieved the data");
 						// console.log(scores);
 						// let scores = JSON.stringify(evt.data);
-						var rows = "<tr><th>NAME</th><th>TRACED</th><th>SCORE</th><th>ATTEMPT</th><th>WARNING</th><th>PENALTY</th></tr>";
+						var rows = "<tr><th>NAME</th><th>HACK ID</th><th>TRACED</th><th>SCORE</th><th>ATTEMPT</th><th>WARNING</th><th>PENALTY</th></tr>";
 						$.each(scores, function(i,item) {
 							rows +="<tr><td>"+item["team_name"]+"</td><td>"+item["hackrank"]+"</td>"+"</td><td>"+item["hasTraced"]+"</td>"+"</td><td>"+item["score"]+"</td>"+"</td><td>"+item["attempt"]+"</td>"+"</td><td>"+item["warning"]+"</td>"+"</td><td>"+item["penalty"]+"</td></tr>";
 						});
