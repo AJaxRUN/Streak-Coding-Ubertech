@@ -90,3 +90,6 @@ tr:nth-child(even) {
 tr:nth-child(odd) {
   background:white;
 }
+tr:nth-child(-n+5) {
+    background-color: #FFD700;
+}
