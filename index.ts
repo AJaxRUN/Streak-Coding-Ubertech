@@ -112,7 +112,9 @@ async function ourprocess(){
         });
         app.get("*", (req, res, next)=>{
             try{
-                res.sendFile(__dirname + "/wwwroot/" + req.path);
+                if(req.path != ""){
+                    res.sendFile(__dirname + "/wwwroot/" + req.path);
+                }
             }
             catch(err){
                 res.send('This is a Typical 404');
