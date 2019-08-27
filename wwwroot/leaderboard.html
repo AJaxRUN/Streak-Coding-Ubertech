@@ -10,7 +10,24 @@
   		<li style="float:left;margin-left:20px;"><a id="streak_coding" class="active" style="text-decoration:none;">STREAK CODING</a></li>
   		<li style="float:right;margin-right:10px" id="flip"><a class="active" style="text-decoration:none;" href="candidates.html">Candidates list</a></li>
 	</ul>
-	<script>
+	<style type="text/css">
+		hr{
+			border-color: #696464;
+		}
+		body {
+			font-family: 'Roboto', sans-serif;
+		}
+	</style>
+</head>
+<body>
+	<div id="navbar" style="z-index:1000;position:relative;width:auto;height:auto;"></div>
+	<div class="data">
+		<h2>LEADERBOARD</h2><hr>
+		<table id="leaderboard">
+		</table>
+	</div>
+</body>
+<script>
 		const host = "localhost";
 		const port = "8134";
 		if ("WebSocket" in window) {
@@ -25,7 +42,7 @@
 						let scores = JSON.parse(evt.data);
 						console.log("Recieved the data");
 						// console.log(scores);
-						let scores = JSON.stringify(evt.data);
+						// let scores = JSON.stringify(evt.data);
 						var rows = "<tr><th>NAME</th><th>TRACED</th><th>SCORE</th><th>ATTEMPT</th><th>WARNING</th><th>PENALTY</th></tr>";
 						$.each(scores, function(i,item) {
 							rows +="<tr><td>"+item["team_name"]+"</td><td>"+item["hackrank"]+"</td>"+"</td><td>"+item["hasTraced"]+"</td>"+"</td><td>"+item["score"]+"</td>"+"</td><td>"+item["attempt"]+"</td>"+"</td><td>"+item["warning"]+"</td>"+"</td><td>"+item["penalty"]+"</td></tr>";
@@ -46,21 +63,4 @@
                alert("WebSocket NOT supported by your Browser!");
             }
 	</script>
-	<style type="text/css">
-		hr{
-			border-color: #696464;
-		}
-		body {
-			font-family: 'Roboto', sans-serif;
-		}
-	</style>
-</head>
-<body>
-	<div id="navbar" style="z-index:1000;position:relative;width:auto;height:auto;"></div>
-	<div class="data">
-		<h2>LEADERBOARD</h2><hr>
-		<table id="leaderboard">
-		</table>
-	</div>
-</body>
 </html>
