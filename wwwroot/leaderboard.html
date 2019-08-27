@@ -20,13 +20,21 @@
                ws.onopen = function() {
                   console.log("Connected to the socket server...");
                };
-               ws.onmessage = function (evt) { 
-					let scores = JSON.stringify(evt.data);
-					// Dear Arjun,
-					// Here you have the scores object
-					// The format is the one that I told you in lab that day
-					// Please fill up the code in this section which would fill the table
-					// You can refresh the table here everytime
+               ws.onmessage = function (evt) {
+				   try{
+						let scores = JSON.parse(evt.data);
+						console.log("Recieved the data");
+						console.log(scores);
+						// Dear Arjun,
+						// Here you have the scores object
+						// The format is the one that I told you in lab that day
+						// Please fill up the code in this section which would fill the table
+						// You can refresh the table here everytime
+				   }
+				   catch(err){
+					   // This means that the sent data has a problem, or the communication has an error
+					   ;
+				   }
                };
 				
                ws.onclose = function() { 

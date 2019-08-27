@@ -23,7 +23,7 @@ let misc = {
 let app
 let app2;
 let server;
-let websocket: WebSocket;
+let websocket: WebSocket[] = [];
 let socketsettings = {
     port: 8134
 };
@@ -163,7 +163,7 @@ async function ourprocess(){
 
         wss.on('connection', (ws: WebSocket) => {
             console.log("Connected to a client");
-            websocket = ws;
+            websocket.push(ws);
         });
 
         //start our server
@@ -211,12 +211,15 @@ function repeatProcedure(){
 }
 
 function publish(message: string) {
-    try{
-        websocket.send(message);
-        console.log("Sent the message " + message);
-    }
-    catch(err){
-        console.log("No Socket Connections");
+    console.log("Publishing " + message);
+    for (let i = 0; i<websocket.length;){
+        try{
+            websocket[i].send(message);
+            i++;
+        }
+        catch(err){
+            websocket.splice(i, 1);
+        }
     }
 }
 
