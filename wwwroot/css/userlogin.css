@@ -79,19 +79,20 @@ table {
   border: 2px solid #444444;
   margin-bottom: 1%;
 }
-
+th {
+/*  background: :white;*/
+  margin-left: 20px;
+  text-align: center;
+  border-bottom: 2px solid #444444;
+}
+tr:nth-child(-n+6) {
+    color: #FFD700;
+}
 tr:nth-child(even) {
   background: #9999ff;
 }
 tr:nth-child(odd) {
   background:white;
 }
-tr:nth-child(-n+5) {
-    background-color: #FFD700;
-}
-th {
-  color:white;
-  margin-left: 20px;
-  text-align: center;
-  border-bottom: 2px solid #444444;
-}
+
+
