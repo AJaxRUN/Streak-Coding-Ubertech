@@ -29,6 +29,7 @@ let socketsettings = {
 };
 let host = "localhost";
 let contestName = "thisisatemporaryevent";
+// 9e95a086a6fcc6889f7f22b17b18eeed79f911ed61b91e6f806c3f22ac720a83
 let adminpassword = "ola";
 
 let passwords = ["6fBgDhF0UBER!", "3aLbNcP2UBER!", "3lFmHnJ2UBER!", "1gHhJiL2UBER!", "5tEuGvI0UBER!", "1eIfKgM1UBER!", "2wTxVyX1UBER!", "4qArCsE2UBER!", "6oCpEqG2UBER!", "1iEjGkI1UBER!", "0kJlLmN0UBER!", "0aBbDcF2UBER!", "4uFvHwJ1UBER!", "1jUkWlY2UBER!", "1pDqFrH0UBER!"];
@@ -60,7 +61,7 @@ async function ourprocess(){
             else{
                 try{
                     if(scores[req.query["uid"]]["hasTraced"] == true){
-                        res.send("You can do that only once (warning for your safety). This act has been noted by the team");
+                        res.send("You can do that only once (warning for your safety). Stop fiddling around and solve round two. This act of yours has been noted by the team");
                         scores[req.query["uid"]]["warning"] += 1;
                         saveScores();
                         return;
@@ -84,7 +85,7 @@ async function ourprocess(){
                         scores[req.query["uid"]]["penalty"] += points.traceforpassPenalty;
                         scores[req.query["uid"]]["attempt"] += 1;
                         saveScores();
-                        res.send("The Password you have traced is wrong");
+                        res.send("The Password you have traced is wrong. Attempt no: " + scores[req.query["uid"]]["attempt"]);
                     }
                 }
                 catch(err){
