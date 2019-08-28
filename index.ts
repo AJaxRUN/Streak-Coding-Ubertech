@@ -28,9 +28,9 @@ let socketsettings = {
     port: 8134
 };
 //let host = "localhost";
-let host = "34.93.141.229";
-let contestName = "thisisatemporaryevent";
-//let contestName = "9e95a086a6fcc6889f7f22b17b18eeed79f911ed61b91e6f806c3f22ac720a83"
+//let host = "34.93.141.229";
+//let contestName = "thisisatemporaryevent";
+let contestName = "9e95a086a6fcc6889f7f22b17b18eeed79f911ed61b91e6f806c3f22ac720a83"
 let adminpassword = "ola";
 
 let passwords = ["6fBgDhF0UBER!", "3aLbNcP2UBER!", "3lFmHnJ2UBER!", "1gHhJiL2UBER!", "5tEuGvI0UBER!", "1eIfKgM1UBER!", "2wTxVyX1UBER!", "4qArCsE2UBER!", "6oCpEqG2UBER!", "1iEjGkI1UBER!", "0kJlLmN0UBER!", "0aBbDcF2UBER!", "4uFvHwJ1UBER!", "1jUkWlY2UBER!", "1pDqFrH0UBER!"];
@@ -94,12 +94,25 @@ async function ourprocess(){
                 }
             }
         });
+        app.get("/getQuestion", (req, res, next)=>{
+            if(req.query["set"] == undefined){
+                res.send("Give the set number as 'set'");
+            }
+            else{
+                if(req.query["pass"] != adminpassword){
+                    res.send("Give the correct Admin password as 'pass'");
+                }
+                else{
+                    res.sendFile(__dirname + "/wwwroot/questions/user" + req.query["set"] + ".pdf");
+                }
+            }
+        });
         app.get("/", (req, res, next)=>{
-            res.sendFile(__dirname + "/wwwroot/leaderboard.html");
+            res.sendFile(__dirname + "/wwwroot/index.html");
         });
         app.get("*", (req, res, next)=>{
             try{
-                if(req.path != ""){
+                if(req.path != "" && !req.path.startsWith("/questions")){
                     res.sendFile(__dirname + "/wwwroot/" + req.path);
                 }
             }
