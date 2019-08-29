@@ -31,6 +31,7 @@ let socketsettings = {
 //let host = "34.93.141.229";
 //let contestName = "thisisatemporaryevent";
 let contestName = "9e95a086a6fcc6889f7f22b17b18eeed79f911ed61b91e6f806c3f22ac720a83"
+let contestName2 = "ffb441d5ac87ce80e1503a3d81340a22167dd883ff369a6032224b4c52ff5d0b"
 let adminpassword = "ola";
 
 let passwords = ["6fBgDhF0UBER!", "3aLbNcP2UBER!", "3lFmHnJ2UBER!", "1gHhJiL2UBER!", "5tEuGvI0UBER!", "1eIfKgM1UBER!", "2wTxVyX1UBER!", "4qArCsE2UBER!", "6oCpEqG2UBER!", "1iEjGkI1UBER!", "0kJlLmN0UBER!", "0aBbDcF2UBER!", "4uFvHwJ1UBER!", "1jUkWlY2UBER!", "1pDqFrH0UBER!"];

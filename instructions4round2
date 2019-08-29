@@ -1,0 +1,3 @@
+copy the top 6 participants from /saved data/candidates.json and /saved data/scores.json to /saved data/candidates2.json and /saved data/scores2.json respectively
+You need to use start_script2.sh
+enjoy

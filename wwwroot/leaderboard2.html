@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>STREAK CODING</title>
+	<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+	<link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+	<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+	<link rel="stylesheet" href="css/request.css">
+	<link rel="stylesheet" href="css/userlogin2.css">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <ul>
+  		<li style="float:left;margin-left:20px;"><a id="streak_coding" class="active" style="text-decoration:none;">STREAK CODING</a></li>
+  		<li style="float:right;margin-right:10px" id="flip"><a class="active" style="text-decoration:none;" href="candidates.html">Candidates list</a></li>
+	</ul>
+	<style type="text/css">
+		hr{
+			border-color: #696464;
+		}
+		body {
+			font-family: 'Roboto', sans-serif;
+		}
+	</style>
+</head>
+<body>
+	<div id="navbar" style="z-index:1000;position:relative;width:auto;height:auto;"></div>
+	<div class="data">
+		<h2>LEADERBOARD</h2><hr>
+		<table id="leaderboard">
+		</table>
+	</div>
+</body>
+<script>
+		//const host = "localhost";
+		const host = "34.93.141.229";
+		const port = "8134";
+		if ("WebSocket" in window) {
+               // Let us open a web socket
+               ws = new WebSocket('ws://' + host + ":" + port);
+				
+               ws.onopen = function() {
+				  console.log("Connected to the socket server");
+				  $("#leaderboard").html("<h5>Loading...</h5>");
+               };
+               ws.onmessage = function (evt) {
+				   try{
+						let scores = JSON.parse(evt.data);
+						//console.log("Recieved the data");
+						scores.sort(function(a, b) {
+					        if(a["score"] != b["score"]){
+					        	return b["score"] - a["score"];
+							}
+							else{
+								return a["hackrank"] - b["hackrank"];
+							}
+					    });
+						var rows = "<tr><th>TEAM</th><th>HACK' ID</th><th>TRACED?</th><th>ATTEMPTS</th><th>WARNING</th><th>PENALTY</th><th>SCORE</th></tr>";
+
+						$.each(scores, function(i,item) {
+							rows +="<tr><td>"+item["team_name"]+"</td><td>"+item["hackerrank"]+"</td>"+"</td><td>"+ (item["hasTraced"] == false? "No" : "Yes")+"</td><td>"+item["attempt"]+"</td>"+"</td><td>"+item["warning"]+"</td>"+"</td><td>"+item["penalty"]+"</td><td>"+item["score"]+"</td></tr>";
+						});
+						$("#leaderboard").html(rows);
+				   }
+				   catch(err){
+					   alert("Error connecting to the server!");
+					   console.log(err);
+				   }
+               };
+				
+               ws.onclose = function() { 
+                  console.log("Disconnected from the server");
+               };
+            } else {
+               // The browser doesn't support WebSocket
+               alert("WebSocket NOT supported by your Browser!");
+            }
+	</script>
+</html>
