@@ -9,6 +9,7 @@ import * as WebSocket from "ws";
 import * as http from 'http';
 
 let httpport = 8133;
+let sockport = 8134;
 
 // The following data are taken from "saved data" folder
 // This is a JSON with UID as the key
@@ -24,9 +25,7 @@ let app
 let app2;
 let server;
 let websocket: WebSocket[] = [];
-let socketsettings = {
-    port: 8134
-};
+
 //let host = "localhost";
 //let host = "34.93.141.229";
 //let contestName = "thisisatemporaryevent";
@@ -186,7 +185,7 @@ async function ourprocess(){
         });
 
         //start our server
-        server.listen(8134, () => {
+        server.listen(sockport, () => {
             console.log("Socket Server started on port 8134");
         });
     }

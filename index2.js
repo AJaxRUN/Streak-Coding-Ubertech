@@ -44,6 +44,7 @@ var request = require("request");
 var WebSocket = require("ws");
 var http = require("http");
 var httpport = 8133;
+var sockport = 8134;
 // The following data are taken from "saved data" folder
 // This is a JSON with UID as the key
 var candidates = {};
@@ -58,9 +59,6 @@ var app;
 var app2;
 var server;
 var websocket = [];
-var socketsettings = {
-    port: 8134
-};
 //let host = "localhost";
 //let host = "34.93.141.229";
 //let contestName = "thisisatemporaryevent";
@@ -129,7 +127,7 @@ function ourprocess() {
                         websocket.push(ws);
                     });
                     //start our server
-                    server.listen(8134, function () {
+                    server.listen(sockport, function () {
                         console.log("Socket Server started on port 8134");
                     });
                     return [3 /*break*/, 4];
