@@ -84,7 +84,7 @@ th {
   text-align: center;
   border-bottom: 2px solid #444444;
 }
-tr:nth-child(-n+2) {
+tr:nth-child(-n+4) {
     font-weight:bold;
 }
 tr:nth-child(even) {

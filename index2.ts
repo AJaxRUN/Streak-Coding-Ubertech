@@ -8,8 +8,8 @@ import * as request from "request";
 import * as WebSocket from "ws";
 import * as http from 'http';
 
-let httpport = 8133;
-let sockport = 8134;
+let httpport = 3002;
+let sockport = 3003;
 
 // The following data are taken from "saved data" folder
 // This is a JSON with UID as the key
@@ -32,8 +32,8 @@ let websocket: WebSocket[] = [];
 //let host = "34.93.141.229";
 //let contestName = "thisisatemporaryevent";
 //let contestName = "9e95a086a6fcc6889f7f22b17b18eeed79f911ed61b91e6f806c3f22ac720a83"
-let contestName = "ffb441d5ac87ce80e1503a3d81340a22167dd883ff369a6032224b4c52ff5d0b"
-let adminpassword = "ola";
+let contestName = "ffb441d5ac87ce80e1503a3d81340a22167dd883ff369a6032224b4c52ff5d0b";
+let adminpassword = "olatech";
 
 ourprocess();
 
@@ -52,7 +52,7 @@ async function ourprocess(){
         });
         app.get("*", (req, res, next)=>{
             try{
-                if(req.path == "/leaderboard.html"){
+                if(req.path.startsWith("/leaderboard")){
                     res.sendFile(__dirname + "/wwwroot/leaderboard2.html");
                 }
                 else if(req.path != ""){
@@ -95,7 +95,7 @@ async function ourprocess(){
 
         //start our server
         server.listen(sockport, () => {
-            console.log("Socket Server started on port 8134");
+            console.log("Socket Server started on port " + sockport);
         });
     }
     catch(err){
@@ -119,7 +119,7 @@ function repeatProcedure(){
             }
             Object.keys(scores).forEach((key, index) => {
                 if(result[candidates[key]["hackerrank"]] != undefined){
-                    scores[key]["hackscore"] = Number.parseInt(result[candidates[key]["hackerrank"]]["score"]);
+                    scores[key]["hackscore2"] = Number.parseInt(result[candidates[key]["hackerrank"]]["score"]);
                     scores[key]["hackrank"] = Number.parseInt(result[candidates[key]["hackerrank"]]["rank"]);
                 }
             });
@@ -163,10 +163,10 @@ function loadScores(){
     }
 }
 function saveCandidates(){
-    fs.writeFileSync(__dirname + '/saved data/candidates.json', JSON.stringify(candidates));
+    fs.writeFileSync(__dirname + '/saved data/candidates2.json', JSON.stringify(candidates));
 }
 function saveScores(){
-    fs.writeFileSync(__dirname + '/saved data/scores.json', JSON.stringify(scores));
+    fs.writeFileSync(__dirname + '/saved data/scores2.json', JSON.stringify(scores));
     let temp = [];
     Object.keys(scores).forEach((key, index) => {
         // key: the name of the object key
@@ -174,7 +174,7 @@ function saveScores(){
         temp.push({
             "hasTraced": scores[key]["hasTraced"],
             "warning": scores[key]["warning"],
-            "score": (1-round3percentage) * scores[key]["score"] + round3percentage*scores[key]["hackscore"],
+            "score": (1-round3percentage) * (scores[key]["score"] + scores[key]["hackscore"]) + round3percentage*scores[key]["hackscore2"],
             "attempt": scores[key]["attempt"],
             "penalty": scores[key]["penalty"],
             "team_name": candidates[key]["team_name"],
@@ -183,9 +183,4 @@ function saveScores(){
         });
     });
     publish(JSON.stringify(temp));
-}
-function pad(num, size) {
-    let s = num+"";
-    while (s.length < size) s = "0" + s;
-    return s;
 }

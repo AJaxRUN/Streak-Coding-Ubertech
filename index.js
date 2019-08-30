@@ -59,15 +59,15 @@ var app2;
 var server;
 var websocket = [];
 //let host = "localhost";
-//let host = "34.93.141.229";
+var host = "34.93.141.229";
 //let contestName = "thisisatemporaryevent";
 var contestName = "9e95a086a6fcc6889f7f22b17b18eeed79f911ed61b91e6f806c3f22ac720a83";
-var contestName2 = "ffb441d5ac87ce80e1503a3d81340a22167dd883ff369a6032224b4c52ff5d0b";
-var adminpassword = "ola";
+//let contestName2 = "ffb441d5ac87ce80e1503a3d81340a22167dd883ff369a6032224b4c52ff5d0b"
+var adminpassword = "olatech";
 var passwords = ["6fBgDhF0UBER!", "3aLbNcP2UBER!", "3lFmHnJ2UBER!", "1gHhJiL2UBER!", "5tEuGvI0UBER!", "1eIfKgM1UBER!", "2wTxVyX1UBER!", "4qArCsE2UBER!", "6oCpEqG2UBER!", "1iEjGkI1UBER!", "0kJlLmN0UBER!", "0aBbDcF2UBER!", "4uFvHwJ1UBER!", "1jUkWlY2UBER!", "1pDqFrH0UBER!"];
 var points = {
-    "traceforpass": 10,
-    "traceforpassPenalty": 10,
+    "traceforpass": 3,
+    "traceforpassPenalty": 3,
     "hackerrankwithouttracePenaltyPenalty": 1000
 };
 ourprocess();
@@ -150,7 +150,10 @@ function ourprocess() {
                     });
                     app.get("*", function (req, res, next) {
                         try {
-                            if (req.path != "" && !req.path.startsWith("/questions")) {
+                            if (req.path == "/password.html/thereisnoneedofthisroute") {
+                                res.send("We really mean it! 'There is no need of this route'. Remove the last part. Go to http://" + host + ":" + httpport + "/password.html");
+                            }
+                            else if (req.path != "" && !req.path.startsWith("/questions")) {
                                 res.sendFile(__dirname + "/wwwroot/" + req.path);
                             }
                         }

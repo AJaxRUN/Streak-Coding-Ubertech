@@ -32,7 +32,8 @@
 <script>
 		//const host = "localhost";
 		const host = "34.93.141.229";
-		const port = "8134";
+		//const port = "8134";
+		const port = "3003";
 		if ("WebSocket" in window) {
                // Let us open a web socket
                ws = new WebSocket('ws://' + host + ":" + port);
@@ -53,10 +54,10 @@
 								return a["hackrank"] - b["hackrank"];
 							}
 					    });
-						var rows = "<tr><th>TEAM</th><th>HACK' ID</th><th>TRACED?</th><th>ATTEMPTS</th><th>WARNING</th><th>PENALTY</th><th>SCORE</th></tr>";
+						var rows = "<tr><th>TEAM</th><th>HACK' ID</th><th>SCORE</th></tr>";
 
 						$.each(scores, function(i,item) {
-							rows +="<tr><td>"+item["team_name"]+"</td><td>"+item["hackerrank"]+"</td>"+"</td><td>"+ (item["hasTraced"] == false? "No" : "Yes")+"</td><td>"+item["attempt"]+"</td>"+"</td><td>"+item["warning"]+"</td>"+"</td><td>"+item["penalty"]+"</td><td>"+item["score"]+"</td></tr>";
+							rows +="<tr><td>"+item["team_name"]+"</td><td>"+item["hackerrank"]+"</td>"+"</td><td>"+item["score"]+"</td></tr>";
 						});
 						$("#leaderboard").html(rows);
 				   }
